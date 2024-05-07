@@ -17,8 +17,11 @@ describe("P2PLending", function () {
   it("Should request a loan", async function () {
     await p2pLending.requestLoan(100, 5, 30);
     const loans = await p2pLending.loans(owner.address);
+    
     // Check the length of the loans array
+    
     expect(loans.length).to.equal(1);
+    
     // Access the first loan and check its properties
     expect(loans[0].amount).to.equal(100);
     expect(loans[0].interestRate).to.equal(5);
@@ -27,8 +30,10 @@ describe("P2PLending", function () {
   
   it("Should fund a loan", async function () {
     await p2pLending.requestLoan(100, 5, 30);
+    
     // Get the loans of the owner
     const loans = await p2pLending.loans(owner.address);
+    
     // Fund the first loan
     await p2pLending.fundLoan(owner.address, 0, { value: 100 });
     // Check if the loan is funded
